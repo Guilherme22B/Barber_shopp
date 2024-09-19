@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "342615151960",
+    "project_id": "barber-shopp-eeb35",
+    "storage_bucket": "barber-shopp-eeb35.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342615151960:android:e32b6f76030cad1c34c12d",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVEyUKc4P-ylJMgLVSoiin_xFUHTLTog8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
