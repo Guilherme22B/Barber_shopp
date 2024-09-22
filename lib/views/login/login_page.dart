@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:myapp/views/home/home_page.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
-  Widget loginForm() {
+  Widget loginForm(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
             color: const Color.fromARGB(37, 157, 158, 150),
@@ -52,7 +53,13 @@ class Login extends StatelessWidget {
                     fontSize: 14,
                     fontWeight: FontWeight.w600),
               ),
-              onPressed: () {},
+              onPressed: () {
+                // Navegar para a HomePage ao clicar no botão
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
             ),
           ),
         ]));
@@ -72,7 +79,7 @@ class Login extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const SizedBox(height: 30),
-            loginForm(),
+            loginForm(context),
           ],
         ),
       ),

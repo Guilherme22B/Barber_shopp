@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/login.dart';
+import 'package:myapp/views/login/login_page.dart';
+//import 'views/home/home.dart';
 
 void main() {
   runApp(const MyApp());
-  // Commit de teste
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.black, brightness: Brightness.dark),
         useMaterial3: true,
       ),
-      home: const Login(),
+      home: const LoginPage(),
     );
   }
 }
