@@ -7,35 +7,61 @@ class LoginPage extends StatelessWidget {
 
   Widget loginForm(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            color: const Color.fromARGB(37, 157, 158, 150),
-            borderRadius: BorderRadius.circular(10)),
-        width: double.infinity,
-        height: 306,
-        alignment: Alignment.center,
-        child: Column(children: [
-          const SizedBox(height: 30),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1A1B1F),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: const Color(0xFF26272B), 
+          width: 2, 
+        ),
+      ),
+      width: double.infinity,
+      height: 306,
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
           const Text(
-            "Óla, faça seu login!",
+            "Olá, Faça seu Login!",
             style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+              color: Colors.white,
+              fontSize: 18,
+            ),
           ),
           const SizedBox(height: 20),
-          TextFormField(
+          SizedBox(
+            width: 250,
+            height: 40,
+            child: TextFormField(
               decoration: const InputDecoration(
-            labelText: 'E-mail:',
-            labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          )),
+                labelText: 'E-mail:',
+                labelStyle: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 12,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 20),
-          TextFormField(
+          SizedBox(
+            width: 250,
+            height: 40,
+            child: TextFormField(
               decoration: const InputDecoration(
-            labelText: 'Senha',
-            labelStyle: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          )),
+                labelText: 'Senha',
+                labelStyle: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 12,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: 10),
           const Text(
             "É novo aqui? Crie a sua conta!",
@@ -43,18 +69,18 @@ class LoginPage extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           SizedBox(
-            width: 298,
+            width: 265,
             child: CupertinoButton(
               color: const Color.fromRGBO(99, 47, 47, 1),
               child: const Text(
                 "Confirmar",
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600),
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               onPressed: () {
-                // Navegar para a HomePage ao clicar no botão
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => HomePage()),
@@ -62,7 +88,9 @@ class LoginPage extends StatelessWidget {
               },
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 
   @override
@@ -70,16 +98,33 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFF141518),
+        elevation: 0,
+        centerTitle: true,
+        title: Container(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Image.asset(
+            'images/Tittle.png',
+            height: 90,
+          ),
+        ),
       ),
       body: Container(
+        color: const Color(0xFF141518),
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(27),
+        padding: const EdgeInsets.all(0.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(height: 30),
-            loginForm(context),
+            const SizedBox(height: 10),
+            Image.asset(
+              'images/Barber-Logo.png',
+              height: 220,
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
+              child: loginForm(context),
+            )
           ],
         ),
       ),
