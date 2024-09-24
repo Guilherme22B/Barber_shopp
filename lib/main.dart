@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/views/login/login_page.dart';
-//import 'views/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Login',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
         colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.black, brightness: Brightness.dark),
         useMaterial3: true,
