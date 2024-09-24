@@ -11,16 +11,23 @@ class MainLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meu App'),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        title: Container(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Image.asset(
+            'assets/images/Tittle.png',
+            height: 90,
+          ),
+        ),
       ),
-      drawer: Drawer(
+      endDrawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             const DrawerHeader(
               child: const Text('Menu'),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.black,
               ),
             ),
             ListTile(
