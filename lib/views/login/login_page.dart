@@ -11,8 +11,8 @@ class LoginPage extends StatelessWidget {
         color: const Color(0xFF1A1B1F),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: const Color(0xFF26272B), 
-          width: 2, 
+          color: const Color(0xFF26272B),
+          width: 2,
         ),
       ),
       width: double.infinity,
@@ -104,7 +104,7 @@ class LoginPage extends StatelessWidget {
         title: Container(
           padding: const EdgeInsets.only(top: 20.0),
           child: Image.asset(
-            'images/Tittle.png',
+            'assets/images/Tittle.png',
             height: 90,
           ),
         ),
@@ -117,7 +117,7 @@ class LoginPage extends StatelessWidget {
           children: <Widget>[
             const SizedBox(height: 10),
             Image.asset(
-              'images/Barber-Logo.png',
+              'assets/images/Barber-Logo.png',
               height: 220,
             ),
             const SizedBox(height: 10),
