@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/views/agendamento/agendamento_page.dart';
 import 'package:myapp/views/login/login_page.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.black, brightness: Brightness.dark),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const AgendamentoPage(),
     );
   }
 }
