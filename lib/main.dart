@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/views/agendamento/agendamento_page.dart';
+import 'package:myapp/views/home/home_page.dart';
 import 'package:myapp/views/login/login_page.dart';
 
 void main() {
