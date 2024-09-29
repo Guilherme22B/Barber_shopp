@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+//import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   @override
@@ -75,7 +75,7 @@ class BarberHomePage extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(MdiIcons.scissorsCutting),
+              //leading: const Icon(MdiIcons.scissorsCutting),
               title: const Text('Crie Sua Barbearia'),
               onTap: () {},
             ),
@@ -126,7 +126,7 @@ class BarberHomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ServiceButton(label: "Cabelo", icon: Icons.content_cut),
-                  ServiceButton(label: "Barba", icon: MdiIcons.mustache),
+                  //ServiceButton(label: "Barba", icon: MdiIcons.mustache),
                   ServiceButton(label: "Acabamento", icon: Icons.brush),
                 ],
               ),
