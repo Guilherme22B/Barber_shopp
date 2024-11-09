@@ -170,7 +170,7 @@ class CortesCard extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         backgroundImage: NetworkImage(
-                          "https://s3-alpha-sig.figma.com/img/2f7f/0250/6b545e7df7f46978c54489089e18d1db?Expires=1728259200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=k6hUCf4E5~~VTxRvqrAqNNoykchjyeIEKVPJn0MyvA4oxkfXc04wHjtsT72x5EGQnANJka2MOpNiX1rjIMrJYqn95PeXXV6Emn6iG0E2W2PZJ-mBa1Y-5Ppr5hcGBi1SZkS3xIVKnMFcx6liwxxz7IN6LNuBMi5zzcR5INPVV0eR~aYcIJcTdFTm9Whq0vRyRkOEi3hh0a8xTK6K7M7zqssBA8a8v4CvcFPwyN0SrXsHX89KGFZ747Qr3uOZ56abA4heIap4CUQ~Xx41Zx6p4nlAfjbv8TrSXpAUvLQd79Cr-3suPN2~CErU~xzH9fxaFXzC2vStVJGH5mMxY6dOfA__",
+                          "https://static.wixstatic.com/media/7e2813_32470f410c2c4f9d910b8db25600b895~mv2.jpeg/v1/fill/w_640,h_516,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/7e2813_32470f410c2c4f9d910b8db25600b895~mv2.jpeg",
                         ),
                         radius: 12, 
                       ),
