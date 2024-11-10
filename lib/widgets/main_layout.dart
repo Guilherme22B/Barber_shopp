@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/views/home/home_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:myapp/views/agendamento/agendamento_page.dart';
+import 'package:myapp/views/book/book_page.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget body;
@@ -83,6 +84,16 @@ class MainLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const AgendamentoPage()));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month_outlined),
+              title: const Text('Reserva'),
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookPageApp()));
               },
             ),
             ListTile(

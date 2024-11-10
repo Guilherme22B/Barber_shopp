@@ -18,6 +18,7 @@ class LoginPage extends StatelessWidget {
       width: double.infinity,
       height: 306,
       alignment: Alignment.center,
+      child: SingleChildScrollView(
       child: Column(
         children: [
           const SizedBox(height: 20),
@@ -50,6 +51,7 @@ class LoginPage extends StatelessWidget {
             width: 250,
             height: 40,
             child: TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Senha',
                 labelStyle: TextStyle(
@@ -90,7 +92,8 @@ class LoginPage extends StatelessWidget {
           ),
         ],
       ),
-    );
+      ),
+      );
   }
 
   @override
@@ -109,7 +112,8 @@ class LoginPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
+      body:SingleChildScrollView( 
+      child:Container(
         color: const Color(0xFF141518),
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(0.0),
@@ -118,7 +122,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 10),
             Image.asset(
               'assets/images/Barber-Logo.png',
-              height: 220,
+              height: 320,
             ),
             const SizedBox(height: 10),
             Padding(
@@ -127,6 +131,7 @@ class LoginPage extends StatelessWidget {
             )
           ],
         ),
+      ),
       ),
     );
   }
