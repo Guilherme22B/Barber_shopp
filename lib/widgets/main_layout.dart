@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/views/screen1/screen1_page.dart';
-import 'package:myapp/views/screen2/screen2_page.dart';
+import 'package:myapp/views/home/home_page.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:myapp/views/agendamento/agendamento_page.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget body;
@@ -10,8 +11,11 @@ class MainLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF141518),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: const Color(0xFF141518),
+        elevation: 0,
+        centerTitle: false,
         title: Container(
           padding: const EdgeInsets.only(top: 20.0),
           child: Image.asset(
@@ -21,32 +25,80 @@ class MainLayout extends StatelessWidget {
         ),
       ),
       endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        backgroundColor: const Color(0xFF1A1B1F),
+        child: Column(
           children: <Widget>[
-            const DrawerHeader(
-              child: const Text('Menu'),
-              decoration: BoxDecoration(
-                color: Colors.black,
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      //Navigator.push(
+                      // context,
+                      // MaterialPageRoute(builder: (context) => ),
+                      //);
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: Icon(Icons.person, size: 40, color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  const Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Usuário Nome",
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      Text(
+                        "usuario@email.com",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
+            const Divider(),
             ListTile(
-              title: Text('Tela 1'),
+              leading: const Icon(Icons.home),
+              title: const Text('Início'),
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Screen1Page()),
-                );
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const HomePage()));
               },
             ),
             ListTile(
-              title: Text('Tela 2'),
+              leading: const Icon(MdiIcons.scissorsCutting),
+              title: const Text('Crie Sua Barbearia'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month_outlined),
+              title: const Text('Agendamentos'),
               onTap: () {
                 Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Screen2Page()),
-                );
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AgendamentoPage()));
               },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Configurações'),
+              onTap: () {},
+            ),
+            const Spacer(),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.exit_to_app, size: 30),
+              title: const Text(
+                'Sair',
+                style: TextStyle(fontSize: 18),
+              ),
+              onTap: () {},
             ),
           ],
         ),

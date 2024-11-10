@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/views/agendamento/agendamento_page.dart';
+import 'package:myapp/views/home/home_page.dart';
 import 'package:myapp/views/login/login_page.dart';
 
 void main() {
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Login',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.black,
@@ -19,7 +22,7 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.black, brightness: Brightness.dark),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const AgendamentoPage(),
     );
   }
 }
