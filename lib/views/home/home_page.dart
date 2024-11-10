@@ -117,7 +117,7 @@ class ServiceButton extends StatelessWidget {
           )),
       style: ElevatedButton.styleFrom(
         backgroundColor: const Color(0xFF1A1B1F),
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       ),
     );
   }
@@ -131,7 +131,7 @@ class PromotionBanner extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.brown[300],
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: const Row(
         children: [

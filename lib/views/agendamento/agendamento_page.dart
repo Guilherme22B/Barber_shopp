@@ -22,13 +22,14 @@ class AgendamentoPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 0),
             SectionTitle(
               title: "CONFIRMADOS",
               fontSize: 12.0,
               color: Color.fromARGB(205, 255, 255, 255),
             ),
-            SizedBox(height: 10),
+            
+            SizedBox(height: 0),
             BarberList(isFinalizado: false), // Lista de confirmados
             SizedBox(height: 20),
             SectionTitle(
@@ -53,7 +54,7 @@ class SectionTitle extends StatelessWidget {
   const SectionTitle({
     super.key,
     required this.title,
-    this.fontSize = 18.0,
+    this.fontSize = 16.0,
     this.color = Colors.white,
     this.fontWeight = FontWeight.bold,
   });
