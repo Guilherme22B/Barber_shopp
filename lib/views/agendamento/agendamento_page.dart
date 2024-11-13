@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../widgets/main_layout.dart';
 
-const Color confirmadoColor = Color.fromRGBO(162, 132, 94, 1); 
-const Color finalizadoColor = Color.fromRGBO(131, 136, 150, 1); 
+const Color confirmadoColor = Color.fromRGBO(162, 132, 94, 1);
+const Color finalizadoColor = Color.fromRGBO(131, 136, 150, 1);
 
 class AgendamentoPage extends StatelessWidget {
   const AgendamentoPage({super.key});
@@ -28,7 +28,6 @@ class AgendamentoPage extends StatelessWidget {
               fontSize: 12.0,
               color: Color.fromARGB(205, 255, 255, 255),
             ),
-            
             SizedBox(height: 0),
             BarberList(isFinalizado: false), // Lista de confirmados
             SizedBox(height: 20),
@@ -79,36 +78,47 @@ class BarberList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> cortes = isFinalizado
+        ? [
+            {
+              'confirmadoName': 'Finalizado',
+              'cortesName': 'Corte de cabelo',
+              'barberName': 'Vintage barber',
+              'date': 'Julho\n   22',
+            },
+            {
+              'confirmadoName': 'Finalizado',
+              'cortesName': 'Corte de cabelo',
+              'barberName': 'Vintage barber',
+              'date': 'Julho\n   07',
+            },
+            {
+              'confirmadoName': 'Finalizado',
+              'cortesName': 'Corte de cabelo',
+              'barberName': 'Vintage barber',
+              'date': 'Junho\n   23',
+            },
+          ]
+        : [
+            {
+              'confirmadoName': 'Confirmado',
+              'cortesName': 'Corte de cabelo',
+              'barberName': 'Vintage barber',
+              'date': 'Agosto\n    06',
+            },
+          ];
+
     return Column(
-      children: isFinalizado
-          ? const [
-              CortesCard(
-                confirmadoName: "Finalizado",
-                cortesName: "Corte de cabelo",
-                barberName: "Vintage barber",
-                date: "Julho\n   22",
-              ),
-              CortesCard(
-                confirmadoName: "Finalizado",
-                cortesName: "Corte de cabelo",
-                barberName: "Vintage barber",
-                date: "Julho\n   07",
-              ),
-              CortesCard(
-                confirmadoName: "Finalizado",
-                cortesName: "Corte de cabelo",
-                barberName: "Vintage barber",
-                date: "Junho\n   23",
-              ),
-            ]
-          : const [
-              CortesCard(
-                confirmadoName: "Confirmado",
-                cortesName: "Corte de cabelo",
-                barberName: "Vintage barber",
-                date: "Agosto\n    06",
-              ),
-            ],
+      children: cortes
+          .map(
+            (corte) => CortesCard(
+              confirmadoName: corte['confirmadoName']!,
+              cortesName: corte['cortesName']!,
+              barberName: corte['barberName']!,
+              date: corte['date']!,
+            ),
+          )
+          .toList(),
     );
   }
 }
@@ -148,7 +158,8 @@ class CortesCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4.0),
                     decoration: BoxDecoration(
                       color: backgroundColor,
                       borderRadius: BorderRadius.circular(12.0),
@@ -157,11 +168,13 @@ class CortesCard extends StatelessWidget {
                       confirmadoName,
                       style: TextStyle(
                         fontSize: 10.0,
-                        color: confirmadoName == "Confirmado" ? confirmadoColor : finalizadoColor,
-                      ), 
+                        color: confirmadoName == "Confirmado"
+                            ? confirmadoColor
+                            : finalizadoColor,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 5), 
+                  const SizedBox(height: 5),
                   Text(
                     cortesName,
                     style: const TextStyle(fontWeight: FontWeight.bold),
@@ -173,9 +186,9 @@ class CortesCard extends StatelessWidget {
                         backgroundImage: NetworkImage(
                           "https://static.wixstatic.com/media/7e2813_32470f410c2c4f9d910b8db25600b895~mv2.jpeg/v1/fill/w_640,h_516,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/7e2813_32470f410c2c4f9d910b8db25600b895~mv2.jpeg",
                         ),
-                        radius: 12, 
+                        radius: 12,
                       ),
-                      const SizedBox(width: 6), 
+                      const SizedBox(width: 6),
                       Text(barberName),
                     ],
                   ),
