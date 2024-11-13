@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart'; // Importar o pacote TableCalendar
-import 'package:intl/intl.dart' show DateFormat; // Importar pacote para formatação de datas
+import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const BookPageApp());
@@ -15,10 +15,10 @@ class BookPageApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const BookPage(),
       theme: ThemeData(
-        brightness: Brightness.dark, // Definir modo dark
+        brightness: Brightness.dark,
         primarySwatch: Colors.brown,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Roboto', // Exemplo de família de fontes
+        fontFamily: 'Roboto',
       ),
     );
   }
@@ -45,26 +45,23 @@ class BookPageState extends State<BookPage> {
         title: const Text('Fazer Reserva'),
         backgroundColor: Colors.black,
       ),
-      body: SingleChildScrollView( // Permite rolagem na tela
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Calendário personalizado usando TableCalendar com altura fixa
+            // Calendário personalizado
             SizedBox(
-              height: 350, // Define um limite de altura para o calendário
+              height: 350,
               child: TableCalendar(
                 firstDay: DateTime.utc(2023, 1, 1),
                 lastDay: DateTime.utc(2025, 12, 31),
                 focusedDay: _focusedDay,
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
+                selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
                     _selectedDay = selectedDay;
-                    _focusedDay = focusedDay; // Atualiza `_focusedDay` aqui também
+                    _focusedDay = focusedDay;
                   });
                 },
                 calendarStyle: const CalendarStyle(
@@ -84,14 +81,11 @@ class BookPageState extends State<BookPage> {
               ),
             ),
             const SizedBox(height: 20),
-
             const Text(
               'Horário',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-
-            // Botões de seleção de horário
             Wrap(
               spacing: 10,
               children: [
@@ -102,12 +96,8 @@ class BookPageState extends State<BookPage> {
               ],
             ),
             const SizedBox(height: 20),
-
-            // Exibição de preço e outras informações
             buildPriceInfo(),
             const SizedBox(height: 20),
-
-            // Botão de confirmação
             buildConfirmButton(),
           ],
         ),
@@ -115,7 +105,6 @@ class BookPageState extends State<BookPage> {
     );
   }
 
-  // Widget para os botões de horários
   Widget timeButton(String time) {
     bool isSelected = time == selectedTime;
     return ElevatedButton(
@@ -125,21 +114,21 @@ class BookPageState extends State<BookPage> {
         });
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected ? Colors.brown : Colors.grey[300],
+        backgroundColor: isSelected ? Colors.brown : Colors.grey[700],
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
         textStyle: const TextStyle(fontSize: 16),
       ),
       child: Text(
         time,
-        style: TextStyle(color: isSelected ? Colors.white : Colors.black),
+        style: TextStyle(color: isSelected ? Colors.white : Colors.white70),
       ),
     );
   }
 
-  // Widget para mostrar as informações de preço, data e barbearia
   Widget buildPriceInfo() {
     return Card(
       elevation: 2,
+      color: Colors.grey[850],
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -147,25 +136,25 @@ class BookPageState extends State<BookPage> {
           children: [
             const Text(
               'Corte de Cabelo',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 5),
             Text(
               'R\$${price.toStringAsFixed(2)}',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
             const SizedBox(height: 5),
             Text(
-              'Data: ${_selectedDay != null ? DateFormat('dd/MM/yyyy').format(_selectedDay!) : 'Selecione uma data'}', // Data formatada
-              style: const TextStyle(fontSize: 16),
+              'Data: ${_selectedDay != null ? DateFormat('dd/MM/yyyy').format(_selectedDay!) : 'Selecione uma data'}',
+              style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
             Text(
               'Horário: $selectedTime',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
             Text(
               'Barbearia: $barbershopName',
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
           ],
         ),
@@ -173,21 +162,18 @@ class BookPageState extends State<BookPage> {
     );
   }
 
-// Botão de confirmar reserva
   Widget buildConfirmButton() {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
           if (_selectedDay == null) {
-            // Mostra uma mensagem caso nenhuma data seja selecionada
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Por favor, selecione uma data.')),
             );
             return;
           }
 
-          // Mostra o diálogo de confirmação
           showDialog(
             context: context,
             builder: (BuildContext context) {
