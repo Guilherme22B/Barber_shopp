@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/views/barber_page/barber_page.dart';
 import 'package:table_calendar/table_calendar.dart'; // Importar o pacote TableCalendar
-import 'package:intl/intl.dart' show DateFormat; // Importar pacote para formatação de datas
+import 'package:intl/intl.dart'
+    show DateFormat; // Importar pacote para formatação de datas
 
 void main() {
   runApp(const BookPageApp());
@@ -46,14 +48,18 @@ class BookPageState extends State<BookPage> {
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
+              icon: const Icon(Icons.close),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => BarberShopPage()),
+                );
+              }
+            ),
         ],
       ),
-      body: SingleChildScrollView( // Permite rolagem na tela
+      body: SingleChildScrollView(
+        // Permite rolagem na tela
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -72,7 +78,8 @@ class BookPageState extends State<BookPage> {
                 onDaySelected: (selectedDay, focusedDay) {
                   setState(() {
                     _selectedDay = selectedDay;
-                    _focusedDay = focusedDay; // Atualiza `_focusedDay` aqui também
+                    _focusedDay =
+                        focusedDay; // Atualiza `_focusedDay` aqui também
                   });
                 },
                 calendarStyle: const CalendarStyle(
@@ -235,5 +242,3 @@ class BookPageState extends State<BookPage> {
     );
   }
 }
-
-
