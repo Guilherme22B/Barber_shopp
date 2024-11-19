@@ -44,6 +44,14 @@ class BookPageState extends State<BookPage> {
       appBar: AppBar(
         title: const Text('Fazer Reserva'),
         backgroundColor: Colors.black,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView( // Permite rolagem na tela
         padding: const EdgeInsets.all(16.0),
