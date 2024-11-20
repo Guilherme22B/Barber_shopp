@@ -50,7 +50,7 @@ class BookPageState extends State<BookPage> {
           IconButton(
               icon: const Icon(Icons.close),
               onPressed: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => BarberShopPage()),
                 );
