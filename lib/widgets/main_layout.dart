@@ -69,7 +69,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Início'),
               onTap: () {
-                Navigator.pushReplacement(context,
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const HomePage()));
               },
             ),
@@ -77,7 +77,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(MdiIcons.scissorsCutting),
               title: const Text('Crie Sua Barbearia'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => BarberShopPage()));
@@ -87,7 +87,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.calendar_month_outlined),
               title: const Text('Agendamentos'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const AgendamentoPage()));
@@ -97,7 +97,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.add_box_outlined),
               title: const Text('Reserva'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const BookPageApp()));
@@ -107,7 +107,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.category_outlined),
               title: const Text('Categorias'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                        builder: (context) => const CategoriaPage()));
