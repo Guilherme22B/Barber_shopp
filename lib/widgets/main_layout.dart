@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/views/barber_page/barber_page.dart';
 import 'package:myapp/views/home/home_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:myapp/views/agendamento/agendamento_page.dart';
@@ -68,20 +69,25 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.home),
               title: const Text('Início'),
               onTap: () {
-                Navigator.pushReplacement(context,
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const HomePage()));
               },
             ),
             ListTile(
               leading: const Icon(MdiIcons.scissorsCutting),
               title: const Text('Crie Sua Barbearia'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => BarberShopPage()));
+              },
             ),
             ListTile(
               leading: const Icon(Icons.calendar_month_outlined),
               title: const Text('Agendamentos'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const AgendamentoPage()));
@@ -91,7 +97,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.add_box_outlined),
               title: const Text('Reserva'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const BookPageApp()));
@@ -101,7 +107,7 @@ class MainLayout extends StatelessWidget {
               leading: const Icon(Icons.category_outlined),
               title: const Text('Categorias'),
               onTap: () {
-                Navigator.pushReplacement(
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                        builder: (context) => const CategoriaPage()));
