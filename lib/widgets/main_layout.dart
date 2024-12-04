@@ -5,6 +5,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:myapp/views/agendamento/agendamento_page.dart';
 import 'package:myapp/views/book/book_page.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
+import 'package:myapp/views/register_barbershop/registerbarbershop_page.dart';
+import 'package:myapp/views/logout/logout_page.dart';
+
 
 class MainLayout extends StatelessWidget {
   final Widget body;
@@ -81,6 +84,11 @@ class MainLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => BarberShopPage()));
+
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RegisterbarbershopPage()));
               },
             ),
             ListTile(
@@ -126,7 +134,12 @@ class MainLayout extends StatelessWidget {
                 'Sair',
                 style: TextStyle(fontSize: 18),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LogoutPage()));
+              },
             ),
           ],
         ),
