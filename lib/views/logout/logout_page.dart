@@ -61,7 +61,8 @@ class LogoutPage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {
                       // Ação para sair
-                      print("Usuário saiu da plataforma.");
+                      Navigator.of(context).pop();
+                      ("Usuário saiu da plataforma.");
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
