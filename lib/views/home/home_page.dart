@@ -4,23 +4,10 @@ import '../../widgets/main_layout.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const BarberHomePage(),
-    );
-  }
-}
-
-class BarberHomePage extends StatelessWidget {
-  const BarberHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-    
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(

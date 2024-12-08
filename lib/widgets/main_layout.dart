@@ -10,7 +10,6 @@ import 'package:myapp/views/register_barbershop/registerbarbershop_page.dart';
 import 'package:myapp/views/logout/logout_page.dart';
 import 'package:myapp/views/login/login_page.dart';
 
-
 class MainLayout extends StatelessWidget {
   final Widget body;
 
@@ -85,7 +84,7 @@ class MainLayout extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => BarberShopPage()));
+                        builder: (context) => const BarberShopPage()));
 
                 Navigator.pushReplacement(
                     context,
