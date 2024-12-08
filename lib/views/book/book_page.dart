@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/views/home/home_page.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
 
@@ -44,7 +45,17 @@ class BookPageState extends State<BookPage> {
       appBar: AppBar(
         title: const Text('Fazer Reserva'),
         backgroundColor: Colors.black,
-      ),
+        actions: <Widget>[ 
+          IconButton( icon: const Icon(Icons.close), 
+          onPressed: () { 
+            Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomePage()));
+          }, 
+        ),
+      ], 
+    ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:myapp/views/barber_page/barber_cortez.dart';
+import 'package:myapp/views/barber_page/barber_los.dart';
+import 'package:myapp/views/barber_page/barber_page.dart';
+import 'package:myapp/views/barber_page/barberelegante.dart';
+import 'package:myapp/views/categoria/categoria_page.dart';
 import '../../widgets/main_layout.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,11 +47,11 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             SectionTitle(title: "Recomendados"),
             SizedBox(height: 10),
-            BarberList(),
+            RecomendadosList(),
             SizedBox(height: 20),
             SectionTitle(title: "Populares"),
             SizedBox(height: 10),
-            BarberList(),
+            PopularesList(),
           ],
         ),
       ),
@@ -93,7 +98,25 @@ class ServiceButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: () {
+        if (label == "Cabelo") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CabeloPage()),
+          );
+        } else if (label == "Barba") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CategoriaPage()),
+          );
+        } else if (label == "Acabamento") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AcabamentoPage()),
+          );
+        }
+      },
+      
       icon: Icon(
         icon,
         color: Colors.white,
@@ -150,8 +173,8 @@ class SectionTitle extends StatelessWidget {
   }
 }
 
-class BarberList extends StatelessWidget {
-  const BarberList({super.key});
+class RecomendadosList extends StatelessWidget {
+  const RecomendadosList({super.key});
   @override
   Widget build(BuildContext context) {
     return const Column(
@@ -163,6 +186,25 @@ class BarberList extends StatelessWidget {
         BarberCard(
           barberName: "Clássica Cortez",
           address: "Rua Castro Alves, 331, São Paulo",
+        ),
+      ],
+    );
+  }
+}
+
+class PopularesList extends StatelessWidget {
+  const PopularesList({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        BarberCard(
+          barberName: "Los Barbeiros",
+          address: "Rua Sete de Setembro, 428, São Paulo",
+        ),
+        BarberCard(
+          barberName: "Homem Elegante",
+          address: "Rua Projetada, 529, São Paulo",
         ),
       ],
     );
@@ -187,7 +229,32 @@ class BarberCard extends StatelessWidget {
         ),
         subtitle: Text(address),
         trailing: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (barberName == "Vintage Barber") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BarberShopPage()),
+              );
+            }
+            if (barberName == "Clássica Cortez") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BarberCortezPage()),
+              );
+            }
+            if (barberName == "Los Barbeiros") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BarberLosPage()),
+              );
+            } else if (barberName == "Homem Elegante") {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const BarberElegantePage()),
+              );
+            }
+          },
           child: const Text("Reservar"),
         ),
       ),

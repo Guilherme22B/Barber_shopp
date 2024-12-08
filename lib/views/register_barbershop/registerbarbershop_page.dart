@@ -26,8 +26,8 @@ class RegisterbarbershopPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 0), // Espaçamento entre o título e o formulário
-            RegisterForm(), // Use o formulário aqui
+            const SizedBox(height: 0), // Espaçamento entre o título e o formulário
+            const RegisterForm(), // Use o formulário aqui
 
             // Container para o texto de copyright com fundo vermelho
             Container(
@@ -35,7 +35,7 @@ class RegisterbarbershopPage extends StatelessWidget {
                   10.0), // Adiciona padding dentro do Container
               color:
                   const Color.fromRGBO(26, 27, 31, 1), // Cor de fundo vermelha
-              child: Align(
+              child: const Align(
                 alignment: Alignment.centerLeft, // Alinha o texto à esquerda
                 child: Text(
                   "© 2023 Copyright FSW Barber",
@@ -48,7 +48,7 @@ class RegisterbarbershopPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 50), // Espaçamento abaixo do texto de copyright
+            const SizedBox(height: 50), // Espaçamento abaixo do texto de copyright
           ],
         ),
       ),

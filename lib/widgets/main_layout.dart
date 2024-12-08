@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/views/barber_page/barber_page.dart';
+import 'package:myapp/views/config/config_page.dart';
 import 'package:myapp/views/home/home_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:myapp/views/agendamento/agendamento_page.dart';
-import 'package:myapp/views/book/book_page.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
 import 'package:myapp/views/register_barbershop/registerbarbershop_page.dart';
 import 'package:myapp/views/logout/logout_page.dart';
+import 'package:myapp/views/login/login_page.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget body;
@@ -75,21 +75,7 @@ class MainLayout extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => const HomePage()));
               },
             ),
-            ListTile(
-              leading: const Icon(MdiIcons.scissorsCutting),
-              title: const Text('Crie Sua Barbearia'),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BarberShopPage()));
-
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterbarbershopPage()));
-              },
-            ),
+            
             ListTile(
               leading: const Icon(Icons.calendar_month_outlined),
               title: const Text('Agendamentos'),
@@ -100,16 +86,19 @@ class MainLayout extends StatelessWidget {
                         builder: (context) => const AgendamentoPage()));
               },
             ),
+
+            
+            const Divider(),
+
             ListTile(
-              leading: const Icon(Icons.add_box_outlined),
-              title: const Text('Reserva'),
+              leading: const Icon(MdiIcons.scissorsCutting),
+              title: const Text('Crie Sua Barbearia'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const BookPageApp()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const RegisterbarbershopPage()));
               },
             ),
+
             ListTile(
               leading: const Icon(Icons.category_outlined),
               title: const Text('Categorias'),
@@ -120,12 +109,20 @@ class MainLayout extends StatelessWidget {
                         builder: (context) => const CategoriaPage()));
               },
             ),
-            ListTile(
+           
+            const Spacer(),
+
+             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Configurações'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ConfigPage()));
+              },
             ),
-            const Spacer(),
+            
             const Divider(),
             ListTile(
               leading: const Icon(Icons.exit_to_app, size: 30),
@@ -138,7 +135,8 @@ class MainLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const LogoutPage()));
-              },
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));              },
             ),
           ],
         ),
