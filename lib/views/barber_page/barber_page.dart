@@ -1,24 +1,12 @@
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: BarberShopPage(),
-    );
-  }
-}
+import '../../widgets/main_layout.dart';
 
 class BarberShopPage extends StatelessWidget {
+  const BarberShopPage({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MainLayout(
       body: Column(
         children: [
           // Cabeçalho com imagem e ícones sobrepostos
@@ -42,8 +30,8 @@ class BarberShopPage extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -80,7 +68,7 @@ class BarberShopPage extends StatelessWidget {
             ],
           ),
           // Conteúdo da página
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -94,7 +82,7 @@ class BarberShopPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     const Row(
                       children: [
                         Icon(Icons.location_on),
@@ -102,7 +90,7 @@ class BarberShopPage extends StatelessWidget {
                         Text('Avenida São Sebastião, 357, São Paulo'),
                       ],
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     const Row(
                       children: [
                         Icon(Icons.star, color: Colors.yellow),
@@ -110,7 +98,7 @@ class BarberShopPage extends StatelessWidget {
                         Text('5.0 (889 avaliações)'),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     const Text(
                       'SOBRE NÓS',
                       style: TextStyle(
@@ -118,11 +106,11 @@ class BarberShopPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     const Text(
                       'Bem-vindo à Vintage Barber, onde tradição encontra estilo. Nossa equipe de mestres barbeiros transforma cortes de cabelo e barbas em obras de arte. Em um ambiente acolhedor, promovemos confiança, estilo e uma comunidade unida.',
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     const Text(
                       'SERVIÇOS',
                       style: TextStyle(
@@ -130,8 +118,8 @@ class BarberShopPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
-                    ServiceCard(
+                    const SizedBox(height: 8.0),
+                    const ServiceCard(
                       imageUrl:
                           'assets/images/cabecalho.jpeg', // Replace with actual image URL
                       serviceName: 'Corte de Cabelo',
@@ -139,14 +127,14 @@ class BarberShopPage extends StatelessWidget {
                           'Estilo personalizado com as últimas tendências.',
                       price: 'R\$ 50,00',
                     ),
-                    ServiceCard(
+                    const ServiceCard(
                       imageUrl: 'assets/images/cabecalho.jpeg',
                       serviceName: 'Barba',
                       serviceDescription:
                           'Modelagem completa para destacar sua masculinidade.',
                       price: 'R\$ 45,00',
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     const Text(
                       'CONTATO',
                       style: TextStyle(
@@ -154,14 +142,14 @@ class BarberShopPage extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     ContactCard(
                       phoneNumber: '(11) 98204-5108',
                     ),
                     ContactCard(
                       phoneNumber: '(11) 99503-2351',
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     const Center(
                       child: Text(
                         ' 2023 Copyright FSW Barber',
@@ -188,7 +176,8 @@ class ServiceCard extends StatelessWidget {
   final String serviceDescription;
   final String price;
 
-  ServiceCard({
+  const ServiceCard({
+    super.key,
     required this.imageUrl,
     required this.serviceName,
     required this.serviceDescription,
@@ -198,7 +187,7 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -209,37 +198,37 @@ class ServiceCard extends StatelessWidget {
               height: 100,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Text('Erro ao carregar imagem');
+                return const Text('Erro ao carregar imagem');
               },
             ),
-            SizedBox(width: 16.0),
+            const SizedBox(width: 16.0),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     serviceName,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(serviceDescription),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         price,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text(
+                        child: const Text(
                           'Reservar',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -259,29 +248,30 @@ class ServiceCard extends StatelessWidget {
 class ContactCard extends StatelessWidget {
   final String phoneNumber;
 
-  ContactCard({required this.phoneNumber});
+  const ContactCard({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
-        leading: Icon(Icons.phone),
+        leading: const Icon(Icons.phone),
         title: Text(phoneNumber),
         trailing: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10), // Padding para fazer o botão mais quadrado
-            side: BorderSide(color: Colors.white, width: 1), // Borda branca
+            side:
+                const BorderSide(color: Colors.white, width: 1), // Borda branca
             shape: RoundedRectangleBorder(
               // Faz o botão quadrado
               borderRadius:
                   BorderRadius.circular(10), // BorderRadius 0 para cantos retos
             ),
           ),
-          child: Text(
+          child: const Text(
             'Copiar',
             style: TextStyle(color: Colors.white),
           ),
@@ -296,7 +286,8 @@ class PulsingIconButton extends StatefulWidget {
   final IconData icon;
   final VoidCallback onPressed;
 
-  PulsingIconButton({
+  const PulsingIconButton({
+    super.key,
     required this.icon,
     required this.onPressed,
   });
@@ -316,7 +307,7 @@ class _PulsingIconButtonState extends State<PulsingIconButton>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 600),
     );
 
     _scaleAnimation = Tween<double>(

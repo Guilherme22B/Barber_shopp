@@ -13,7 +13,7 @@ class RegisterbarbershopPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Align(
+            const Align(
               alignment: Alignment.topLeft,
               child: Padding(
                 padding: const EdgeInsets.only(top: 30.5, left: 10),
