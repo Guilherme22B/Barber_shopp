@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/views/barber_page/barber_page.dart';
+import 'package:myapp/views/config/config_page.dart';
 import 'package:myapp/views/home/home_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:myapp/views/agendamento/agendamento_page.dart';
@@ -7,6 +8,7 @@ import 'package:myapp/views/book/book_page.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
 import 'package:myapp/views/register_barbershop/registerbarbershop_page.dart';
 import 'package:myapp/views/logout/logout_page.dart';
+import 'package:myapp/views/login/login_page.dart';
 
 
 class MainLayout extends StatelessWidget {
@@ -89,6 +91,8 @@ class MainLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const RegisterbarbershopPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BarberShopPage()));
               },
             ),
             ListTile(
@@ -118,13 +122,18 @@ class MainLayout extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                       builder: (context) => const CategoriaPage()));
+                        builder: (context) => const CategoriaPage()));
               },
             ),
             ListTile(
               leading: const Icon(Icons.settings),
               title: const Text('Configurações'),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ConfigPage()));
+              },
             ),
             const Spacer(),
             const Divider(),
@@ -139,7 +148,8 @@ class MainLayout extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const LogoutPage()));
-              },
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));              },
             ),
           ],
         ),
