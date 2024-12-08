@@ -14,74 +14,72 @@ class RegisterForm extends StatelessWidget {
           crossAxisAlignment:
               CrossAxisAlignment.start, // Alinhamento à esquerda
           children: [
-            // Título do formulário
-            Text(
+            const Text(
               'Formulário',
               style: TextStyle(
                   color: const Color.fromARGB(255, 102, 101, 95),
                   fontSize: 14,
                   fontWeight: FontWeight.w400),
             ),
-            SizedBox(height: 30), // Espaçamento após o título
-
-            // Nome da Loja
-            Text(
+            const SizedBox(height: 30), // Espaçamento após o título
+            
+            const Text(
               'Nome da Barbearia:',
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Digite o nome da loja:',
-                hintStyle: TextStyle(color: Colors.white54, fontSize: 11),
+                hintStyle: const TextStyle(color: Colors.white54, fontSize: 11),
                 filled: true,
-                fillColor: Color.fromARGB(26, 27, 31, 1),
+                fillColor: const Color.fromARGB(26, 27, 31, 1),
                 enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
+                     const  BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                       color: const Color.fromARGB(255, 255, 255, 255)),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 30), // Espaçamento ajustado para 30px
+            const SizedBox(height: 30), // Espaçamento ajustado para 30px
 
             // Nome Completo
-            Text(
+            const Text(
               'Seu Nome Completo:',
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
             TextFormField(
               decoration: InputDecoration(
                 hintText: 'Digite seu nome completo:',
-                hintStyle: TextStyle(color: Colors.white54, fontSize: 11),
+                hintStyle: const TextStyle(color: Colors.white54, fontSize: 11),
                 filled: true,
-                fillColor: Color.fromARGB(26, 27, 31, 1),
+                fillColor: const Color.fromARGB(26, 27, 31, 1),
                 enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
+                      const BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                       color: const Color.fromARGB(255, 255, 255, 255)),
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 30), // Espaçamento ajustado para 30px
+            const SizedBox(height: 30), // Espaçamento ajustado para 30px
 
             // CPF
-            Text(
+            const Text(
               'CPF:',
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
@@ -89,28 +87,28 @@ class RegisterForm extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Digite seu CPF:',
-                hintStyle: TextStyle(color: Colors.white54, fontSize: 11),
+                hintStyle: const TextStyle(color: Colors.white54, fontSize: 11),
                 filled: true,
-                fillColor: Color.fromARGB(26, 27, 31, 1),
+                fillColor: const Color.fromARGB(26, 27, 31, 1),
                 enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
+                      const BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                       color: const Color.fromARGB(255, 255, 255, 255)),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 6, horizontal: 10.0),
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 10.0),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 30), // Espaçamento ajustado para 30px
+            const SizedBox(height: 30), // Espaçamento ajustado para 30px
 
             // CNPJ
-            Text(
+            const Text(
               'CNPJ:',
               style: TextStyle(color: Colors.white, fontSize: 15),
             ),
@@ -118,31 +116,31 @@ class RegisterForm extends StatelessWidget {
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
                 hintText: 'Digite o CNPJ:',
-                hintStyle: TextStyle(color: Colors.white54, fontSize: 11),
+                hintStyle: const TextStyle(color: Colors.white54, fontSize: 11),
                 filled: true,
-                fillColor: Color.fromARGB(26, 27, 31, 1),
+                fillColor: const Color.fromARGB(26, 27, 31, 1),
                 enabledBorder: OutlineInputBorder(
                   borderSide:
-                      BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
+                      const BorderSide(color: const Color.fromRGBO(38, 39, 43, 1)),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                       color: const Color.fromARGB(255, 255, 255, 255)),
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 6, horizontal: 10.0),
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 10.0),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
-            SizedBox(height: 30), // Espaçamento ajustado para 30px
+            const SizedBox(height: 30), // Espaçamento ajustado para 30px
 
             // RegisterLocation - Colocando logo acima do botão de envio
-            RegisterLocation(),
+            const RegisterLocation(),
 
             // Espaço entre a imagem e os botões
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Row com os dois botões: Cancelar e Enviar
             Row(
@@ -154,16 +152,16 @@ class RegisterForm extends StatelessWidget {
                   onPressed: () {
                     // Ação ao pressionar o botão Cancelar
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Cadastro cancelado!')),
+                      const SnackBar(content: Text('Cadastro cancelado!')),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text('Cancelar', style: TextStyle(fontSize: 18)),
+                  child: const Text('Cancelar', style: TextStyle(fontSize: 18)),
                 ),
 
                 // Botão de Enviar
@@ -171,19 +169,19 @@ class RegisterForm extends StatelessWidget {
                   onPressed: () {
                     // Ação ao pressionar o botão Enviar
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                           content: Text('Formulário enviado com sucesso!')),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                     backgroundColor: (const Color.fromRGBO(99, 47, 47,
                         1)), // Cor do fundo do botão alterada para azul
                   ),
-                  child: Text('Confirmar', style: TextStyle(fontSize: 18)),
+                  child: const Text('Confirmar', style: TextStyle(fontSize: 18)),
                 ),
               ],
             ),
