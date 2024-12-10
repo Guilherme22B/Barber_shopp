@@ -288,7 +288,7 @@ class SalonCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BookPage()),
+                          builder: (context) => ReservaScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
