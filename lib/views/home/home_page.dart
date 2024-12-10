@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:myapp/views/barber_page/baber_page.dart';
 import 'package:myapp/views/barber_page/barber_classica.dart';
 import 'package:myapp/views/barber_page/barber_elegante.dart';
+import 'package:myapp/views/barber_page/barber_vintage.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
 import '../../widgets/main_layout.dart';
 
@@ -232,7 +233,7 @@ class BarberCard extends StatelessWidget {
             if (barberName == "Vintage Barber") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BarberBarbPage()),
+                MaterialPageRoute(builder: (context) => const BarberVintagePage()),
               );
             }
             if (barberName == "Clássica Cortez") {
@@ -245,7 +246,7 @@ class BarberCard extends StatelessWidget {
             if (barberName == "Los Barbeiros") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BarberElegantePage()),
+                MaterialPageRoute(builder: (context) => const BarberBarbPage()),
               );
             } else if (barberName == "Homem Elegante") {
               Navigator.push(
