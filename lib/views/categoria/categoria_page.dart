@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/views/book/book_page.dart';
+import 'package:myapp/views/reserva/reserva_page.dart';
 import '../../widgets/main_layout.dart';
 
 class CategoriaPage extends StatelessWidget {
@@ -288,7 +288,7 @@ class SalonCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ReservaScreen()),
+                          builder: (context) => MyApp()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
