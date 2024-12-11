@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:myapp/views/barber_page/barber_cortez.dart';
-import 'package:myapp/views/barber_page/barber_los.dart';
-import 'package:myapp/views/barber_page/barber_page.dart';
-import 'package:myapp/views/barber_page/barberelegante.dart';
 import 'package:myapp/views/barber_page/BarberDetailPage.dart';
+import 'package:myapp/views/barber_page/baber_page.dart';
+import 'package:myapp/views/barber_page/barber_classica.dart';
+import 'package:myapp/views/barber_page/barber_elegante.dart';
+import 'package:myapp/views/barber_page/barber_vintage.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
 import '../../widgets/main_layout.dart';
 
@@ -284,12 +284,12 @@ class BarberCard extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const BarberCortezPage()),
+                    builder: (context) => const BarberClassicaPage()),
               );
             } else if (barberName == "Los Barbeiros") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BarberLosPage()),
+                MaterialPageRoute(builder: (context) => const BarberBarbPage()),
               );
             } else if (barberName == "Homem Elegante") {
               Navigator.push(

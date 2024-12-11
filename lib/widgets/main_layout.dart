@@ -26,6 +26,8 @@ class MainLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var isSmallScreen = screenWidth < 600;
     return Scaffold(
       backgroundColor: const Color(0xFF141518),
       appBar: AppBar(
@@ -33,14 +35,14 @@ class MainLayout extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Container(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: EdgeInsets.only(top: isSmallScreen ? 10.0 : 20.0),
           child: Image.asset(
             'assets/images/Tittle.png',
-            height: 90,
+            height: isSmallScreen ? 60 : 90, // Ajuste da altura do logo
           ),
         ),
       ),
-      endDrawer: Drawer(
+      endDrawer: Drawer( // Drawer para pequenas telas
         backgroundColor: const Color(0xFF1A1B1F),
         child: FutureBuilder<Map<String, dynamic>?>(
           future: _getUserData(),
