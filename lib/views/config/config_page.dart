@@ -1,10 +1,10 @@
-// ignore_for_file: depend_on_referenced_packages
-
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ConfigPage extends StatefulWidget {
   const ConfigPage({super.key});
@@ -20,6 +20,41 @@ class _ConfigPageState extends State<ConfigPage> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String? _profileImageUrl;
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      try {
+        DocumentSnapshot userData = await _firestore.collection('users').doc(user.uid).get();
+        if (userData.exists) {
+          setState(() {
+            _nameController.text = userData['name'] ?? "Usuário Nome";
+            _emailController.text = userData['email'] ?? "usuario@gmail.com";
+            _phoneController.text = userData['phone'] ?? "123456789";
+            _profileImageUrl = userData['profileImage'] ?? null;
+          });
+        } else {
+          print("Documento do usuário não encontrado");
+        }
+      } catch (e) {
+        print("Erro ao carregar dados do usuário: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao carregar dados do usuário: $e')),
+        );
+      }
+    } else {
+      print("Usuário não autenticado");
+    }
+  }
 
   Future<void> _checkPermissions() async {
     PermissionStatus cameraStatus = await Permission.camera.status;
@@ -54,13 +89,36 @@ class _ConfigPageState extends State<ConfigPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _nameController.text = "Usuário Nome";
-    _emailController.text = "usuario@gmail.com";
-    _phoneController.text = "123456789";
-    _passwordController.text = "123456";
+  Future<void> _saveChanges() async {
+    if (_formKey.currentState!.validate()) {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        try {
+          // Atualiza dados no Firestore
+          await _firestore.collection('users').doc(user.uid).update({
+            'name': _nameController.text.trim(),
+            'phone': _phoneController.text.trim(),
+            'profileImage': _profileImageUrl,
+          });
+
+          // Atualiza a senha no Firebase Authentication, somente se está preenchida
+          if (_passwordController.text.isNotEmpty) {
+            await user.updatePassword(_passwordController.text.trim());
+          }
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Alterações salvas com sucesso!'),
+            ),
+          );
+        } catch (e) {
+          print("Erro ao salvar alterações: $e");
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Erro ao salvar alterações: $e')),
+          );
+        }
+      }
+    }
   }
 
   @override
@@ -71,7 +129,7 @@ class _ConfigPageState extends State<ConfigPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop(); 
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -134,16 +192,7 @@ class _ConfigPageState extends State<ConfigPage> {
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.email),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira seu e-mail';
-                        }
-                        if (!RegExp(r"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
-                          return 'Por favor, insira um e-mail válido';
-                        }
-                        return null;
-                      },
+                      enabled: false, // Torna o campo não editável
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -155,10 +204,7 @@ class _ConfigPageState extends State<ConfigPage> {
                       ),
                       obscureText: true,
                       validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor, insira sua senha';
-                        }
-                        if (value.length < 6) {
+                        if (value != null && value.isNotEmpty && value.length < 6) {
                           return 'A senha deve ter pelo menos 6 caracteres';
                         }
                         return null;
@@ -181,17 +227,8 @@ class _ConfigPageState extends State<ConfigPage> {
                       },
                     ),
                     const SizedBox(height: 32),
-                    
                     ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Alterações salvas com sucesso!'),
-                            ),
-                          );
-                        }
-                      },
+                      onPressed: _saveChanges,
                       child: const Text('Salvar Alterações'),
                     ),
                   ],

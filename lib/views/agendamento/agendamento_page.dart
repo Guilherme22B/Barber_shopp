@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../widgets/main_layout.dart';
 
 const Color confirmadoColor = Color.fromRGBO(162, 132, 94, 1);
@@ -78,47 +80,46 @@ class BarberList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> cortes = isFinalizado
-        ? [
-            {
-              'confirmadoName': 'Finalizado',
-              'cortesName': 'Corte de cabelo',
-              'barberName': 'Vintage barber',
-              'date': 'Julho\n   22',
-            },
-            {
-              'confirmadoName': 'Finalizado',
-              'cortesName': 'Corte de cabelo',
-              'barberName': 'Vintage barber',
-              'date': 'Julho\n   07',
-            },
-            {
-              'confirmadoName': 'Finalizado',
-              'cortesName': 'Corte de cabelo',
-              'barberName': 'Vintage barber',
-              'date': 'Junho\n   23',
-            },
-          ]
-        : [
-            {
-              'confirmadoName': 'Confirmado',
-              'cortesName': 'Corte de cabelo',
-              'barberName': 'Vintage barber',
-              'date': 'Agosto\n    06',
-            },
-          ];
+    return StreamBuilder<DocumentSnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-    return Column(
-      children: cortes
-          .map(
-            (corte) => CortesCard(
-              confirmadoName: corte['confirmadoName']!,
-              cortesName: corte['cortesName']!,
-              barberName: corte['barberName']!,
-              date: corte['date']!,
+        var userData = snapshot.data!.data() as Map<String, dynamic>;
+        var reservas = userData['reservas'] as List<dynamic>? ?? [];
+
+        var filteredReservas = reservas.where((reserva) {
+          return reserva['status'] == (isFinalizado ? 'finalizado' : 'pendente');
+        }).toList();
+
+        if (filteredReservas.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20.0),
+            child: Center(
+              child: Text(
+                "Ainda não há agendamentos.",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
-          )
-          .toList(),
+          );
+        }
+
+        return Column(
+          children: filteredReservas.map((reserva) {
+            return CortesCard(
+              confirmadoName: reserva['status'] == 'pendente' ? 'Confirmado' : 'Finalizado',
+              cortesName: 'Corte de cabelo', // Assuming all are haircuts, adjust as needed.
+              barberName: reserva['barbershopName'],
+              date: reserva['date'], // Adjust formatting as necessary.
+            );
+          }).toList(),
+        );
+      },
     );
   }
 }

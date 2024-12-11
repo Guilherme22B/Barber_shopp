@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/views/home/home_page.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:intl/intl.dart';
-
-void main() {
-  runApp(const BookPageApp());
-}
-
-class BookPageApp extends StatelessWidget {
-  const BookPageApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const BookPage(),
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.brown,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Roboto',
-      ),
-    );
-  }
-}
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';  // Importar FirebaseAuth para acesso ao UID
 
 class BookPage extends StatefulWidget {
-  const BookPage({super.key});
+  final String barbershopName;
+  final String? barbershopImageUrl;
+
+  const BookPage({
+    super.key,
+    required this.barbershopName,
+    this.barbershopImageUrl,
+  });
 
   @override
   BookPageState createState() => BookPageState();
@@ -37,7 +23,48 @@ class BookPageState extends State<BookPage> {
   DateTime? _selectedDay;
   String selectedTime = "09:45";
   double price = 50.0;
-  String barbershopName = "Vintage Barber";
+
+  Future<void> _sendBookingData() async {
+    if (_selectedDay == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, selecione uma data.')),
+      );
+      return;
+    }
+
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Usuário não autenticado.')),
+      );
+      return;
+    }
+
+    final bookingData = {
+      'barbershopName': widget.barbershopName,
+      'imageUrl': widget.barbershopImageUrl,
+      'date': DateFormat('dd/MM/yyyy').format(_selectedDay!),
+      'time': selectedTime,
+      'status': 'pendente', // Inicialmente como "pendente"
+    };
+
+    try {
+      // Adiciona a nova reserva no documento do usuário
+      DocumentReference userDoc = FirebaseFirestore.instance.collection('users').doc(user.uid);
+
+      await userDoc.update({
+        'reservas': FieldValue.arrayUnion([bookingData]) // Adiciona a reserva no array 'reservas'
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Reserva confirmada!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,23 +72,20 @@ class BookPageState extends State<BookPage> {
       appBar: AppBar(
         title: const Text('Fazer Reserva'),
         backgroundColor: Colors.black,
-        actions: <Widget>[ 
-          IconButton( icon: const Icon(Icons.close), 
-          onPressed: () { 
-            Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomePage()));
-          }, 
-        ),
-      ], 
-    ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Calendário personalizado
             SizedBox(
               height: 350,
               child: TableCalendar(
@@ -147,7 +171,8 @@ class BookPageState extends State<BookPage> {
           children: [
             const Text(
               'Corte de Cabelo',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
             ),
             const SizedBox(height: 5),
             Text(
@@ -164,7 +189,7 @@ class BookPageState extends State<BookPage> {
               style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
             Text(
-              'Barbearia: $barbershopName',
+              'Barbearia: ${widget.barbershopName}',
               style: const TextStyle(fontSize: 16, color: Colors.white70),
             ),
           ],
@@ -177,43 +202,7 @@ class BookPageState extends State<BookPage> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          if (_selectedDay == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Por favor, selecione uma data.')),
-            );
-            return;
-          }
-
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: const Text('Confirmar Reserva'),
-                content: Text(
-                  'Deseja confirmar a reserva para $barbershopName no dia ${DateFormat('dd/MM/yyyy').format(_selectedDay!)} às $selectedTime?',
-                ),
-                actions: <Widget>[
-                  TextButton(
-                    child: const Text('Cancelar'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Reserva confirmada!')),
-                      );
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Confirmar'),
-                  ),
-                ],
-              );
-            },
-          );
-        },
+        onPressed: _sendBookingData,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.brown,
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -224,5 +213,3 @@ class BookPageState extends State<BookPage> {
     );
   }
 }
-
-

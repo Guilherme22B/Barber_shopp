@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:myapp/views/barber_page/barber_cortez.dart';
 import 'package:myapp/views/barber_page/barber_los.dart';
 import 'package:myapp/views/barber_page/barber_page.dart';
 import 'package:myapp/views/barber_page/barberelegante.dart';
+import 'package:myapp/views/barber_page/BarberDetailPage.dart';
 import 'package:myapp/views/categoria/categoria_page.dart';
 import '../../widgets/main_layout.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -116,7 +119,6 @@ class ServiceButton extends StatelessWidget {
           );
         }
       },
-      
       icon: Icon(
         icon,
         color: Colors.white,
@@ -194,17 +196,47 @@ class RecomendadosList extends StatelessWidget {
 
 class PopularesList extends StatelessWidget {
   const PopularesList({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        BarberCard(
+        const BarberCard(
           barberName: "Los Barbeiros",
           address: "Rua Sete de Setembro, 428, São Paulo",
         ),
-        BarberCard(
+        const BarberCard(
           barberName: "Homem Elegante",
           address: "Rua Projetada, 529, São Paulo",
+        ),
+        StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('barbearias').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            }
+
+            if (snapshot.hasError) {
+              return const Text('Erro ao carregar barbearias');
+            }
+
+            final docs = snapshot.data?.docs ?? [];
+
+            return Column(
+              children: docs.map((doc) {
+                final data = doc.data() as Map<String, dynamic>;
+                return BarberCard(
+                  barberName: data['nomeLoja'] ?? 'Nome não disponível',
+                  address: data['localizacao'] ?? 'Endereço não disponível',
+                  description: data['sobre'],
+                  imageUrl: data['imagemPrincipal'],
+                  serviceType: data['servico'],
+                  rating: data['avaliacao']?.toDouble() ?? 5.0, // Assuming your database has a 'avaliacao' field
+                  phoneNumber: data['numero'],
+                );
+              }).toList(),
+            );
+          },
         ),
       ],
     );
@@ -214,9 +246,22 @@ class PopularesList extends StatelessWidget {
 class BarberCard extends StatelessWidget {
   final String barberName;
   final String address;
+  final String? description;
+  final String? imageUrl;
+  final String? serviceType;
+  final double? rating;
+  final String? phoneNumber;
 
-  const BarberCard(
-      {super.key, required this.barberName, required this.address});
+  const BarberCard({
+    super.key,
+    required this.barberName,
+    required this.address,
+    this.description,
+    this.imageUrl, 
+    this.serviceType, 
+    this.rating,
+    this.phoneNumber,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -235,15 +280,13 @@ class BarberCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => const BarberShopPage()),
               );
-            }
-            if (barberName == "Clássica Cortez") {
+            } else if (barberName == "Clássica Cortez") {
               Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => const BarberCortezPage()),
               );
-            }
-            if (barberName == "Los Barbeiros") {
+            } else if (barberName == "Los Barbeiros") {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const BarberLosPage()),
@@ -251,7 +294,23 @@ class BarberCard extends StatelessWidget {
             } else if (barberName == "Homem Elegante") {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const BarberElegantePage()),
+                MaterialPageRoute(
+                    builder: (context) => const BarberElegantePage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BarberDetailPage(
+                    barberName: barberName,
+                    address: address,
+                    description: description,
+                    imageUrl: imageUrl,
+                    serviceType: serviceType,
+                    rating: rating,
+                    phoneNumber: phoneNumber, 
+                  ),
+                ),
               );
             }
           },

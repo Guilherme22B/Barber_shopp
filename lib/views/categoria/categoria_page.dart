@@ -288,7 +288,10 @@ class SalonCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BookPage()),
+                          builder: (context) => BookPage(
+                            barbershopName: name,
+                            barbershopImageUrl: imageUrl,
+                          )),
                     );
                   },
                   style: ElevatedButton.styleFrom(

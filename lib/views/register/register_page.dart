@@ -1,32 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:myapp/views/home/home_page.dart';
-import 'package:myapp/views/register/register_page.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myapp/views/home/home_page.dart';
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  RegisterPage({super.key});
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _login(BuildContext context) async {
+  Future<void> _register(BuildContext context) async {
     if (_formKey.currentState?.validate() ?? false) {
       try {
-        await _auth.signInWithEmailAndPassword(
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
           password: _passwordController.text.trim(),
         );
-        _navigateToHome(context, 'Bem-vindo de volta!');
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'wrong-password') {
-          _showErrorSnackbar(context, 'Senha incorreta.');
+
+        // Adiciona o nome do usuário ao Firestore
+        String? uid = userCredential.user?.uid;
+        if (uid != null) {
+          await _firestore.collection('users').doc(uid).set({
+            'name': _nameController.text.trim(),
+            'email': _emailController.text.trim(),
+          });
+          _navigateToHome(context, 'Conta criada com sucesso!');
         } else {
-          _showErrorSnackbar(context, e.message ?? 'Erro ao fazer login');
+          _showErrorSnackbar(context, 'Erro ao obter UID do usuário.');
         }
+      } on FirebaseAuthException catch (e) {
+        _showErrorSnackbar(context, e.message ?? 'Erro ao criar conta');
+      } catch (e) {
+        _showErrorSnackbar(context, 'Erro inesperado: $e');
       }
     }
   }
@@ -47,7 +58,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget loginForm(BuildContext context) {
+  Widget registerForm(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF1A1B1F),
@@ -58,7 +69,7 @@ class LoginPage extends StatelessWidget {
         ),
       ),
       width: double.infinity,
-      height: 350,
+      height: 490, // Ajustado para acomodar todos os campos
       alignment: Alignment.center,
       child: SingleChildScrollView(
         child: Form(
@@ -66,10 +77,34 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               const Text(
-                "Login na sua Conta",
+                "Crie sua Conta",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 250,
+                height: 70,
+                child: TextFormField(
+                  controller: _nameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome:',
+                    labelStyle: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 12,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor, insira o nome';
+                    }
+                    return null;
+                  },
                 ),
               ),
               const SizedBox(height: 20),
@@ -131,25 +166,22 @@ class LoginPage extends StatelessWidget {
               CupertinoButton(
                 color: const Color.fromRGBO(99, 47, 47, 1),
                 child: const Text(
-                  "Login",
+                  "Registrar",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                onPressed: () => _login(context),
+                onPressed: () => _register(context),
               ),
               const SizedBox(height: 10),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
+                  Navigator.pop(context);
                 },
                 child: const Text(
-                  "Não tem uma conta? Registre-se",
+                  "Já tem uma conta? Faça login",
                   style: TextStyle(color: Colors.blueAccent),
                 ),
               ),
@@ -191,7 +223,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-                child: loginForm(context),
+                child: registerForm(context),
               ),
             ],
           ),
